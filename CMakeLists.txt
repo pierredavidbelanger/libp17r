@@ -25,9 +25,14 @@ FetchContent_MakeAvailable(osn)
 add_library(${PROJECT_NAME}
         STATIC
         include/p17r.h
-        src/arena.c
+        include/p17r-app.h
+        include/p17r-mem.h
+        include/p17r-noise.h
+        include/p17r-rl.h
+        src/app.c
+        src/mem.c
         src/noise.c
-        src/rres.c)
+        src/rl.c)
 
 target_compile_definitions(${PROJECT_NAME}
         PRIVATE

@@ -1,13 +1,11 @@
-#include "p17r.h"
-
+#include "p17r-rl.h"
 #define RRES_IMPLEMENTATION
-#include "rres.h"
-
+#include <rres.h>
 #define RRES_RAYLIB_IMPLEMENTATION
 // #define RRES_SUPPORT_COMPRESSION_LZ4
 // #define RRES_SUPPORT_ENCRYPTION_AES
 // #define RRES_SUPPORT_ENCRYPTION_XCHACHA20
-#include "rres-raylib.h"
+#include <rres-raylib.h>
 
 float Vector2RotationToLookAt(const Vector2 position, const Vector2 target) {
     return -Vector2LineAngle(position, target) * RAD2DEG - 90.0f;

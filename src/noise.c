@@ -1,6 +1,6 @@
-#include "p17r.h"
-
-#include "open-simplex-noise.c"
+#include "p17r-noise.h"
+#include "p17r-mem.h"
+#include <open-simplex-noise.c>
 
 struct osn_t {
     struct osn_context *ctx;
