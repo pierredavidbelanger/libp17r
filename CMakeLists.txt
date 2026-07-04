@@ -7,23 +7,19 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 include(FetchContent)
 
 FetchContent_Declare(arena
-        URL https://github.com/tsoding/arena/archive/refs/heads/master.zip
-        DOWNLOAD_EXTRACT_TIMESTAMP true)
+        URL https://github.com/tsoding/arena/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(arena)
 
 FetchContent_Declare(raylib
-        URL https://github.com/raysan5/raylib/archive/refs/heads/master.zip
-        DOWNLOAD_EXTRACT_TIMESTAMP true)
+        URL https://github.com/raysan5/raylib/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(raylib)
 
 FetchContent_Declare(rres
-        URL https://github.com/raysan5/rres/archive/refs/heads/master.zip
-        DOWNLOAD_EXTRACT_TIMESTAMP true)
+        URL https://github.com/raysan5/rres/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(rres)
 
 FetchContent_Declare(osn
-        URL https://github.com/smcameron/open-simplex-noise-in-c/archive/refs/heads/master.zip
-        DOWNLOAD_EXTRACT_TIMESTAMP true)
+        URL https://github.com/smcameron/open-simplex-noise-in-c/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(osn)
 
 add_library(${PROJECT_NAME}
