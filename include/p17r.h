@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#if IS_DEBUG_BUILD
+#if P17R_DEBUG
 #ifndef P17R_MALLOC
 #define P17R_MALLOC(sz)      malloc(sz);printf("P17R_MALLOC(%d)\n",sz)
 #endif

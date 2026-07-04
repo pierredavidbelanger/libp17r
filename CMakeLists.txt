@@ -35,8 +35,7 @@ add_library(${PROJECT_NAME}
 
 target_compile_definitions(${PROJECT_NAME}
         PRIVATE
-        $<$<CONFIG:Debug>:IS_DEBUG_BUILD=1>
-        $<$<CONFIG:Release>:IS_RELEASE_BUILD=1>)
+        $<$<CONFIG:Debug>:P17R_DEBUG=1>)
 
 target_include_directories(
         ${PROJECT_NAME}
