@@ -1,7 +1,9 @@
 #ifndef P17R_RL_H
 #define P17R_RL_H
 
-#include <p17r-mem.h>
+#include <stdlib.h>
+
+#include "p17r-mem.h"
 
 #define RL_MALLOC(sz) P17R_MALLOC(sz)
 #define RL_CALLOC(n,sz) P17R_CALLOC(n,sz)
@@ -14,6 +16,7 @@
 #define RESS_CALLOC(n,sz) P17R_CALLOC(n,sz)
 #define RESS_REALLOC(ptr,sz) P17R_REALLOC(ptr,sz)
 #define RESS_FREE(ptr) P17R_FREE(ptr)
+#define RRES_SUPPORT_LOG_INFO 0
 #include <rres.h>
 
 typedef struct {

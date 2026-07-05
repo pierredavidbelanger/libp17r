@@ -1,5 +1,7 @@
 #include "p17r-sched.h"
+
 #include <raylib.h>
+
 #include <math.h>
 
 #define MIN(a,b) (((a)<(b))?(a):(b))

@@ -1,6 +1,10 @@
 #include "p17r-rl.h"
+
+#include "p17r-log.h"
+
 #define RRES_IMPLEMENTATION
 #include <rres.h>
+
 #define RRES_RAYLIB_IMPLEMENTATION
 // #define RRES_SUPPORT_COMPRESSION_LZ4
 // #define RRES_SUPPORT_ENCRYPTION_AES
@@ -106,11 +110,11 @@ Ress LoadRess(const char *fileName) {
     strncpy(ress.fileName, fileName, sizeof(ress.fileName));
     ress.dir = rresLoadCentralDirectory(ress.fileName);
     for (unsigned int i = 0; i < ress.dir.count; i++) {
-        TraceLog(LOG_INFO, "RRES: CDIR: File entry %03i: %s", i + 1, ress.dir.entries[i].fileName);
+        TRACELOG(LOG_INFO, "RRES: CDIR: File entry %03i: %s", i + 1, ress.dir.entries[i].fileName);
     }
     ress.atlasCount = 0;
     ress.atlases = (Atlas *) P17R_CALLOC(ress.atlasCount, sizeof(Atlas));
-    TraceLog(LOG_INFO, "RRES: Loaded %s", ress.fileName);
+    TRACELOG(LOG_INFO, "RRES: Loaded %s", ress.fileName);
     return ress;
 }
 
@@ -118,16 +122,16 @@ void UnloadRess(Ress *ress) {
     for (size_t i = 0; i < ress->atlasCount; i++) {
         Atlas *atlas = &ress->atlases[i];
         P17R_FREE(atlas->sprites);
-        TraceLog(LOG_INFO, "RRES: Unloaded %d Sprites for Atlas %d", atlas->spriteCount, i + 1);
+        TRACELOG(LOG_INFO, "RRES: Unloaded %d Sprites for Atlas %d", atlas->spriteCount, i + 1);
         atlas->spriteCount = 0;
         atlas->sprites = NULL;
         UnloadTexture(atlas->texture);
     }
     P17R_FREE(ress->atlases);
-    TraceLog(LOG_INFO, "RRES: Unloaded %d Atlas", ress->atlasCount);
+    TRACELOG(LOG_INFO, "RRES: Unloaded %d Atlas", ress->atlasCount);
     ress->atlasCount = 0;
     ress->atlases = NULL;
-    TraceLog(LOG_INFO, "RRES: Unloaded %s", ress->fileName);
+    TRACELOG(LOG_INFO, "RRES: Unloaded %s", ress->fileName);
     rresUnloadCentralDirectory(ress->dir);
 }
 
@@ -190,8 +194,7 @@ Atlas RessLoadAtlas(Ress *ress, const char *fileName) {
     ress->atlasCount++;
     ress->atlases = (Atlas *) P17R_REALLOC(ress->atlases, ress->atlasCount * sizeof(Atlas));
     ress->atlases[ress->atlasCount - 1] = atlas;
-    TraceLog(LOG_INFO, "RRES: Atlas loaded successfully (Texture [ID %d], %d Sprites)",
-             atlas.texture.id, atlas.spriteCount);
+    TRACELOG(LOG_INFO, "RRES: Atlas loaded successfully (Texture [ID %d], %d Sprites)", atlas.texture.id, atlas.spriteCount);
     return atlas;
 }
 
@@ -199,13 +202,13 @@ Sprite AtlasGetSprite(const Atlas *atlas, const char *nameId) {
     Sprite sprite = {0};
     for (size_t i = 0; i < atlas->spriteCount; i++) {
         if (strcmp(atlas->sprites[i].nameId, nameId) == 0) {
-            TraceLog(LOG_INFO, "ATLAS: Sprite %s found", nameId);
+            TRACELOG(LOG_INFO, "ATLAS: Sprite %s found", nameId);
             sprite = atlas->sprites[i];
             break;
         }
     }
     if (sprite.texture.id == 0) {
-        TraceLog(LOG_INFO, "ATLAS: Sprite %s NOT found", nameId);
+        TRACELOG(LOG_INFO, "ATLAS: Sprite %s NOT found", nameId);
     }
     return sprite;
 }

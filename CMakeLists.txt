@@ -6,37 +6,39 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 include(FetchContent)
 
-FetchContent_Declare(arena
-        URL https://github.com/tsoding/arena/archive/refs/heads/master.zip)
+FetchContent_Declare(arena URL https://github.com/tsoding/arena/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(arena)
 
-FetchContent_Declare(raylib
-        URL https://github.com/raysan5/raylib/archive/refs/heads/master.zip)
+FetchContent_Declare(raylib URL https://github.com/raysan5/raylib/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(raylib)
 
-FetchContent_Declare(rres
-        URL https://github.com/raysan5/rres/archive/refs/heads/master.zip)
+FetchContent_Declare(rres URL https://github.com/raysan5/rres/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(rres)
 
-FetchContent_Declare(osn
-        URL https://github.com/smcameron/open-simplex-noise-in-c/archive/refs/heads/master.zip)
+FetchContent_Declare(osn URL https://github.com/smcameron/open-simplex-noise-in-c/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(osn)
 
-add_library(${PROJECT_NAME}
+target_compile_definitions(
+        raylib
+        PRIVATE
+        $<$<CONFIG:Release>:SUPPORT_TRACELOG=0>
+)
+
+add_library(
+        ${PROJECT_NAME}
         STATIC
         include/p17r.h
+        include/p17r-log.h
         include/p17r-mem.h
         include/p17r-noise.h
         include/p17r-rl.h
         include/p17r-sched.h
+        src/log.c
         src/mem.c
         src/noise.c
         src/rl.c
-        src/sched.c)
-
-target_compile_definitions(${PROJECT_NAME}
-        PRIVATE
-        $<$<CONFIG:Debug>:P17R_DEBUG=1>)
+        src/sched.c
+)
 
 target_include_directories(
         ${PROJECT_NAME}
@@ -46,8 +48,11 @@ target_include_directories(
         ${FETCHCONTENT_BASE_DIR}/rres-src/src
         PRIVATE
         ${FETCHCONTENT_BASE_DIR}/arena-src
-        ${FETCHCONTENT_BASE_DIR}/osn-src)
+        ${FETCHCONTENT_BASE_DIR}/osn-src
+)
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(
+        ${PROJECT_NAME}
         PRIVATE
-        raylib)
+        raylib
+)
