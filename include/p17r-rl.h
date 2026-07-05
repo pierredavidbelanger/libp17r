@@ -3,17 +3,17 @@
 
 #include <p17r-mem.h>
 
-#define RL_MALLOC(sz)        P17R_MALLOC(sz)
-#define RL_CALLOC(n,sz)      P17R_CALLOC(n,sz)
-#define RL_REALLOC(ptr,sz)   P17R_REALLOC(ptr,sz)
-#define RL_FREE(ptr)         P17R_FREE(ptr)
+#define RL_MALLOC(sz) P17R_MALLOC(sz)
+#define RL_CALLOC(n,sz) P17R_CALLOC(n,sz)
+#define RL_REALLOC(ptr,sz) P17R_REALLOC(ptr,sz)
+#define RL_FREE(ptr) P17R_FREE(ptr)
 #include <raylib.h>
 #include <raymath.h>
 
-#define RESS_MALLOC(sz)      P17R_MALLOC(sz)
-#define RESS_CALLOC(n,sz)    P17R_CALLOC(n,sz)
+#define RESS_MALLOC(sz) P17R_MALLOC(sz)
+#define RESS_CALLOC(n,sz) P17R_CALLOC(n,sz)
 #define RESS_REALLOC(ptr,sz) P17R_REALLOC(ptr,sz)
-#define RESS_FREE(ptr)       P17R_FREE(ptr)
+#define RESS_FREE(ptr) P17R_FREE(ptr)
 #include <rres.h>
 
 typedef struct {
@@ -57,6 +57,8 @@ Vector2 Vector2Half();
 
 Vector2 Vector2Absolute(Vector2 v);
 
+void Vector4Components(Vector4 v, float components[4]);
+
 Vector2 RectangleCorner(Rectangle rectangle);
 
 Vector2 RectangleSize(Rectangle rectangle);
@@ -64,6 +66,8 @@ Vector2 RectangleSize(Rectangle rectangle);
 Rectangle RectangleFromCornerAndSize(Vector2 corner, Vector2 size);
 
 Rectangle RectangleFromCornerToCorner(Vector2 corner1, Vector2 corner2);
+
+Rectangle RectanglePad(Rectangle r, Vector2 padding);
 
 Rectangle Texture2DRectangle(Texture2D texture);
 

@@ -18,21 +18,14 @@ void osn_free(osn_t *osn) {
     P17R_FREE(osn);
 }
 
-double osn_noise2d_norm(const osn_t *osn,
-                        const double x, const double y,
-                        const double w, const double h,
-                        const double scale) {
+double osn_noise2d_norm(const osn_t *osn, const double x, const double y, const double w, const double h, const double scale) {
     const OSNFLOAT sx = x / w * scale;
     const OSNFLOAT sy = y / h * scale;
     const OSNFLOAT result = open_simplex_noise2(osn->ctx, sx, sy);
     return (double) (((OSNFLOAT) 1.0 + result) / (OSNFLOAT) 2.0);
 }
 
-double osn_noise2d_wrap_norm(const osn_t *osn,
-                             const double x, const double y,
-                             const double scale_x, const double scale_y,
-                             const double w, const double h,
-                             const unsigned int octaves, const double lacunarity, const double gain) {
+double osn_noise2d_wrap_norm(const osn_t *osn, const double x, const double y, const double scale_x, const double scale_y, const double w, const double h, const unsigned int octaves, const double lacunarity, const double gain) {
     OSNFLOAT result = (OSNFLOAT) 0.0;
     // Value and max theoretical amplitude
     OSNFLOAT result_value = (OSNFLOAT) 0.0;
@@ -72,10 +65,7 @@ double osn_noise2d_wrap_norm(const osn_t *osn,
     // return (double) result;
 }
 
-double osn_noise3d_norm(const osn_t *osn,
-                        const double x, const double y, const double z,
-                        const double w, const double h, const double d,
-                        const double scale) {
+double osn_noise3d_norm(const osn_t *osn, const double x, const double y, const double z, const double w, const double h, const double d, const double scale) {
     const OSNFLOAT sx = x / w * scale;
     const OSNFLOAT sy = y / h * scale;
     const OSNFLOAT sz = z / d * scale;

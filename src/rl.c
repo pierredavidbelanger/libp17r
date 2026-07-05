@@ -37,6 +37,13 @@ Vector2 Vector2Absolute(const Vector2 v) {
     return Vector2FromScalars(fabsf(v.x), fabsf(v.y));
 }
 
+void Vector4Components(const Vector4 v, float components[4]) {
+    components[0] = v.x;
+    components[1] = v.y;
+    components[2] = v.z;
+    components[3] = v.w;
+}
+
 Vector2 RectangleCorner(const Rectangle rectangle) {
     return Vector2FromScalars(rectangle.x, rectangle.y);
 }
@@ -53,6 +60,15 @@ Rectangle RectangleFromCornerToCorner(const Vector2 corner1, const Vector2 corne
     const Vector2 corner = Vector2Min(corner1, corner2);
     const Vector2 size = Vector2Absolute(Vector2Subtract(corner1, corner2));
     return RectangleFromCornerAndSize(corner, size);
+}
+
+Rectangle RectanglePad(const Rectangle r, const Vector2 padding) {
+    Rectangle result = r;
+    result.x += padding.x;
+    result.y += padding.y;
+    result.width -= padding.x * 2.0f;
+    result.height -= padding.y * 2.0f;
+    return result;
 }
 
 Rectangle Texture2DRectangle(const Texture2D texture) {
@@ -150,8 +166,7 @@ Atlas RessLoadAtlas(Ress *ress, const char *fileName) {
                 int positionX = 0, positionY = 0;
                 int sourceWidth = 0, sourceHeight = 0;
                 // s <nameId> <tag> <originX> <originY> <positionX> <positionY> <sourceWidth> <sourceHeight> <padding> <trimmed> <trimRecX> <trimRecY> <trimRecWidth> <trimRecHeight> <colliderType> <colliderX> <colliderY> <colliderSizeX> <colliderSizeY>
-                sscanf(line, "s %s %*s %d %d %d %d %d %d %*d %*d %*d %*d %*d %*d %*d %*d %*d %*d %*d",
-                       nameId, &originX, &originY, &positionX, &positionY, &sourceWidth, &sourceHeight);
+                sscanf(line, "s %s %*s %d %d %d %d %d %d %*d %*d %*d %*d %*d %*d %*d %*d %*d %*d %*d", nameId, &originX, &originY, &positionX, &positionY, &sourceWidth, &sourceHeight);
                 const Vector2 position = Vector2FromScalars(positionX, positionY);
                 const Vector2 size = Vector2FromScalars(sourceWidth, sourceHeight);
                 const Vector2 origin = Vector2FromScalars(originX, originY);
