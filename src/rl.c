@@ -11,6 +11,11 @@
 // #define RRES_SUPPORT_ENCRYPTION_XCHACHA20
 #include <rres-raylib.h>
 
+#define RAYGUI_IMPLEMENTATION
+// #define RAYGUI_DEBUG_RECS_BOUNDS
+// #define RAYGUI_DEBUG_TEXT_BOUNDS
+#include <raygui.h>
+
 float Vector2RotationToLookAt(const Vector2 position, const Vector2 target) {
     return -Vector2LineAngle(position, target) * RAD2DEG - 90.0f;
 }
@@ -39,6 +44,14 @@ Vector2 Vector2Half() {
 
 Vector2 Vector2Absolute(const Vector2 v) {
     return Vector2FromScalars(fabsf(v.x), fabsf(v.y));
+}
+
+Vector2 Vector2NegateX(Vector2 v) {
+    return Vector2FromScalars(-v.x, v.y);
+}
+
+Vector2 Vector2NegateY(Vector2 v) {
+    return Vector2FromScalars(v.x, -v.y);
 }
 
 void Vector4Components(const Vector4 v, float components[4]) {
@@ -234,4 +247,31 @@ Sprite SpriteFromSheet(const SpriteSheet sheet, const int idx, const Vector2 ori
     sprite.size = sheet.size;
     sprite.origin = Vector2Multiply(origin, sheet.size);
     return sprite;
+}
+
+Rectangle GuiBounds(const float x, const float y, const float width, const float height) {
+    return (Rectangle){
+        .x = x,
+        .y = y,
+        .width = width,
+        .height = height,
+    };
+}
+
+Rectangle GuiBoundsInside(const Rectangle parent, const float pad_h, const float pad_v, const float width, const float height) {
+    return (Rectangle){
+        .x = parent.x + pad_h,
+        .y = parent.y + pad_v,
+        .width = width > 1 ? width : parent.width * width - pad_h - pad_h,
+        .height = height > 1 ? height : parent.height * height - pad_v - pad_v,
+    };
+}
+
+Rectangle GuiBoundsInsideAfter(const Rectangle parent, const float pad_h, const float pad_v, const float width, const float height, const Rectangle sibling, const bool vertical) {
+    return (Rectangle){
+        .x = !vertical ? sibling.x + sibling.width + pad_h : sibling.x,
+        .y = vertical ? sibling.y + sibling.height + pad_v : sibling.y,
+        .width = width > 1 ? width : parent.width * width - pad_h - pad_h,
+        .height = height > 1 ? height : parent.height * height - pad_v - pad_v,
+    };
 }

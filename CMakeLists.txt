@@ -15,8 +15,14 @@ FetchContent_MakeAvailable(raylib)
 FetchContent_Declare(rres URL https://github.com/raysan5/rres/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(rres)
 
+FetchContent_Declare(raygui URL https://github.com/raysan5/raygui/archive/refs/heads/master.zip)
+FetchContent_MakeAvailable(raygui)
+
 FetchContent_Declare(osn URL https://github.com/smcameron/open-simplex-noise-in-c/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(osn)
+
+FetchContent_Declare(fnl URL https://github.com/Auburn/FastNoiseLite/archive/refs/heads/master.zip)
+FetchContent_MakeAvailable(fnl)
 
 target_compile_definitions(
         raylib
@@ -46,6 +52,8 @@ target_include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${FETCHCONTENT_BASE_DIR}/raylib-build/raylib/include
         ${FETCHCONTENT_BASE_DIR}/rres-src/src
+        ${FETCHCONTENT_BASE_DIR}/raygui-src/src
+        ${FETCHCONTENT_BASE_DIR}/fnl-src/C
         PRIVATE
         ${FETCHCONTENT_BASE_DIR}/arena-src
         ${FETCHCONTENT_BASE_DIR}/osn-src

@@ -19,6 +19,11 @@
 #define RRES_SUPPORT_LOG_INFO 0
 #include <rres.h>
 
+#define RAYGUI_MALLOC(sz) P17R_MALLOC(sz)
+#define RAYGUI_CALLOC(n,sz) P17R_CALLOC(n,sz)
+#define RAYGUI_FREE(p) P17R_FREE(p)
+#include <raygui.h>
+
 typedef struct {
     Texture2D texture;
     Rectangle source;
@@ -60,6 +65,10 @@ Vector2 Vector2Half();
 
 Vector2 Vector2Absolute(Vector2 v);
 
+Vector2 Vector2NegateX(Vector2 v);
+
+Vector2 Vector2NegateY(Vector2 v);
+
 void Vector4Components(Vector4 v, float components[4]);
 
 Vector2 RectangleCorner(Rectangle rectangle);
@@ -97,5 +106,36 @@ Sprite AtlasGetSprite(const Atlas *atlas, const char *nameId);
 SpriteSheet AtlasGetSpriteSheet(const Atlas *atlas, const char *nameId, int cols, int rows);
 
 Sprite SpriteFromSheet(SpriteSheet sheet, int idx, Vector2 origin);
+
+/**
+ * Create bounds Rectangle
+ * @param x absolute horizontal position
+ * @param y absolute vertical position
+ * @param width absolute horizontal size
+ * @param height absolute vertical size
+ */
+Rectangle GuiBounds(float x, float y, float width, float height);
+
+/**
+ * Create bounds Rectangle inside parent bounds
+ * @param parent the parent bounds
+ * @param pad_h absolute horizontal padding
+ * @param pad_v absolute vertical padding
+ * @param width absolute (or relative as percent if <= 1) horizontal width
+ * @param height absolute (or relative as percent if <= 1) vertical height
+ */
+Rectangle GuiBoundsInside(Rectangle parent, float pad_h, float pad_v, float width, float height);
+
+/**
+ * Create bounds Rectangle inside parent bounds and relative to a sibling bounds
+ * @param parent the parent bounds
+ * @param pad_h absolute horizontal padding
+ * @param pad_v absolute vertical padding
+ * @param width absolute (or relative as percent if <= 1) horizontal width
+ * @param height absolute (or relative as percent if <= 1) vertical height
+ * @param sibling the sibling bounds
+ * @param vertical stack under the sibling (same horizontal position) if true, or to the right of the sibling (same vertical position) if false
+ */
+Rectangle GuiBoundsInsideAfter(Rectangle parent, float pad_h, float pad_v, float width, float height, Rectangle sibling, bool vertical);
 
 #endif //P17R_RL_H
