@@ -4,11 +4,6 @@
 // See https://auburn.github.io/FastNoiseLite/
 #include <FastNoiseLite.h>
 
-// typedef struct osn_t osn_t;
-// osn_t *osn_create(long long seed);
-// void osn_free(osn_t *osn);
-// double osn_noise2d_norm(const osn_t *osn, double x, double y, double scale_x, double scale_y, unsigned int octaves, double lacunarity, double gain);
-// double osn_noise2d_wrap_norm(const osn_t *osn, double x, double y, double scale_x, double scale_y, double w, double h, unsigned int octaves, double lacunarity, double gain);
-// double osn_noise3d_norm(const osn_t *osn, double x, double y, double z, double w, double h, double d, double scale);
+float fnlGetNoise2DWrap(const fnl_state *state, FNLfloat x, FNLfloat y, FNLfloat scale_x, FNLfloat scale_y, FNLfloat w, FNLfloat h);
 
 #endif //P17R_NOISE_H
