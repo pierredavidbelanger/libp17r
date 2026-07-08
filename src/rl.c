@@ -42,7 +42,7 @@ Vector2 Vector2FromScalar(const float s) {
     return Vector2FromScalars(s, s);
 }
 
-Vector2 Vector2Half() {
+Vector2 Vector2Half(void) {
     return Vector2FromScalars(0.5f, 0.5f);
 }
 

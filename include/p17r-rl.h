@@ -63,7 +63,7 @@ Vector2 Vector2FromScalars(float x, float y);
 
 Vector2 Vector2FromScalar(float s);
 
-Vector2 Vector2Half();
+Vector2 Vector2Half(void);
 
 Vector2 Vector2Absolute(Vector2 v);
 
