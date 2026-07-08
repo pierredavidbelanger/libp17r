@@ -30,6 +30,10 @@ float RotateAngleTowards(const float rotation, const float target, const float m
     return rotation + (diff > 0.0f ? maxRotation : -maxRotation);
 }
 
+bool RotationIsFacingLeft(const float rotation) {
+    return -sinf(rotation * DEG2RAD) < 0.0f;
+}
+
 Vector2 Vector2FromScalars(const float x, const float y) {
     return (Vector2){.x = x, .y = y};
 }

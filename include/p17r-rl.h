@@ -57,6 +57,8 @@ float Vector2RotationToLookAt(Vector2 position, Vector2 target);
 
 float RotateAngleTowards(float rotation, float target, float maxRotation);
 
+bool RotationIsFacingLeft(float rotation);
+
 Vector2 Vector2FromScalars(float x, float y);
 
 Vector2 Vector2FromScalar(float s);
