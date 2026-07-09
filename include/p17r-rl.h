@@ -71,6 +71,8 @@ Vector2 Vector2NegateX(Vector2 v);
 
 Vector2 Vector2NegateY(Vector2 v);
 
+Vector2 Vector2CopySign(Vector2 v);
+
 void Vector4Components(Vector4 v, float components[4]);
 
 Vector2 RectangleCorner(Rectangle rectangle);
@@ -81,7 +83,9 @@ Rectangle RectangleFromCornerAndSize(Vector2 corner, Vector2 size);
 
 Rectangle RectangleFromCornerToCorner(Vector2 corner1, Vector2 corner2);
 
-Rectangle RectanglePad(Rectangle r, Vector2 padding);
+Rectangle RectangleGrow(Rectangle r, Vector2 delta);
+
+Rectangle RectangleScale(Rectangle r, Vector2 scale);
 
 Rectangle Texture2DRectangle(Texture2D texture);
 

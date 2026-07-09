@@ -50,12 +50,16 @@ Vector2 Vector2Absolute(const Vector2 v) {
     return Vector2FromScalars(fabsf(v.x), fabsf(v.y));
 }
 
-Vector2 Vector2NegateX(Vector2 v) {
+Vector2 Vector2NegateX(const Vector2 v) {
     return Vector2FromScalars(-v.x, v.y);
 }
 
-Vector2 Vector2NegateY(Vector2 v) {
+Vector2 Vector2NegateY(const Vector2 v) {
     return Vector2FromScalars(v.x, -v.y);
+}
+
+Vector2 Vector2CopySign(const Vector2 v) {
+    return Vector2FromScalars((float) copysign(1.0, v.x), (float) copysign(1.0, v.y));
 }
 
 void Vector4Components(const Vector4 v, float components[4]) {
@@ -81,6 +85,21 @@ Rectangle RectangleFromCornerToCorner(const Vector2 corner1, const Vector2 corne
     const Vector2 corner = Vector2Min(corner1, corner2);
     const Vector2 size = Vector2Absolute(Vector2Subtract(corner1, corner2));
     return RectangleFromCornerAndSize(corner, size);
+}
+
+Rectangle RectangleGrow(const Rectangle r, const Vector2 delta) {
+    Rectangle result = r;
+    result.x -= delta.x;
+    result.y -= delta.y;
+    result.width += delta.x * 2.0f;
+    result.height += delta.y * 2.0f;
+    return result;
+}
+
+Rectangle RectangleScale(const Rectangle r, const Vector2 scale) {
+    const Vector2 size = RectangleSize(r);
+    const Vector2 delta = Vector2Subtract(Vector2Multiply(size, scale), size);
+    return RectangleGrow(r, delta);
 }
 
 Rectangle RectanglePad(const Rectangle r, const Vector2 padding) {
@@ -192,7 +211,7 @@ Atlas RessLoadAtlas(Ress *ress, const char *fileName) {
                 const Vector2 size = Vector2FromScalars(sourceWidth, sourceHeight);
                 const Vector2 origin = Vector2FromScalars(originX, originY);
                 Sprite sprite = {0};
-                strncpy(sprite.nameId, nameId, sizeof(sprite.nameId));
+                snprintf(sprite.nameId, sizeof(sprite.nameId), "%s", nameId);
                 sprite.texture = atlas.texture;
                 sprite.source = RectangleFromCornerAndSize(position, size);
                 sprite.size = size;
