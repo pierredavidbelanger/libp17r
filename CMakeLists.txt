@@ -25,6 +25,7 @@ FetchContent_Declare(fnl URL https://github.com/Auburn/FastNoiseLite/archive/ref
 FetchContent_MakeAvailable(fnl)
 
 set(ENABLE_CUSTOM_COMPILER_FLAGS OFF CACHE BOOL "" FORCE)
+set(ENABLE_CJSON_TEST OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(cjson URL https://github.com/davegamble/cjson/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(cjson)
 
@@ -38,16 +39,20 @@ add_library(
         ${PROJECT_NAME}
         STATIC
         include/p17r.h
+        include/p17r-draw.h
         include/p17r-json.h
         include/p17r-log.h
         include/p17r-mem.h
         include/p17r-noise.h
+        include/p17r-resources.h
         include/p17r-rl.h
         include/p17r-sched.h
+        src/draw.c
         src/json.c
         src/log.c
         src/mem.c
         src/noise.c
+        src/resources.c
         src/rl.c
         src/sched.c
 )

@@ -1,6 +1,7 @@
 #include "p17r-rl.h"
 
 #include "p17r-log.h"
+#include "p17r-mem.h"
 
 #define RRES_IMPLEMENTATION
 #include <rres.h>

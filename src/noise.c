@@ -1,9 +1,5 @@
 #include "p17r-noise.h"
 
-#include "p17r-mem.h"
-
-#include <open-simplex-noise.c>
-
 #define FNL_IMPL
 #include <FastNoiseLite.h>
 

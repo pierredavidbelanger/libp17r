@@ -1,6 +1,6 @@
 #include "p17r-sched.h"
 
-#include <raylib.h>
+#include "p17r-rl.h"
 
 #include <math.h>
 

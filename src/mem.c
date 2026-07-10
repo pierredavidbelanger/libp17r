@@ -1,8 +1,7 @@
 #include "p17r-mem.h"
 
 #include "p17r-log.h"
-
-#include <raylib.h>
+#include "p17r-rl.h"
 
 #define ARENA_IMPLEMENTATION
 #include <arena.h>

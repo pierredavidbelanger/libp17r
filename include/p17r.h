@@ -7,10 +7,14 @@
 
 #include <p17r-rl.h>
 
-#include <p17r-sched.h>
-
 #include <p17r-noise.h>
 
 #include <p17r-json.h>
+
+#include <p17r-resources.h>
+
+#include <p17r-draw.h>
+
+#include <p17r-sched.h>
 
 #endif // P17R_H
