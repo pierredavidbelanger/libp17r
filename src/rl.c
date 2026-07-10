@@ -17,6 +17,8 @@
 // #define RAYGUI_DEBUG_TEXT_BOUNDS
 #include <raygui.h>
 
+#include <stdio.h>
+
 float Vector2RotationToLookAt(const Vector2 position, const Vector2 target) {
     return -Vector2LineAngle(position, target) * RAD2DEG - 90.0f;
 }
@@ -144,7 +146,7 @@ void DrawSpriteEx(const Sprite sprite, const Vector2 position,
 
 Ress LoadRess(const char *fileName) {
     Ress ress = {0};
-    strncpy(ress.fileName, fileName, sizeof(ress.fileName));
+    snprintf(ress.fileName, sizeof(ress.fileName), "%s", fileName);
     ress.dir = rresLoadCentralDirectory(ress.fileName);
     for (unsigned int i = 0; i < ress.dir.count; i++) {
         TRACELOG(LOG_INFO, "RRES: CDIR: File entry %03i: %s", i + 1, ress.dir.entries[i].fileName);
