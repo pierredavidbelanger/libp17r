@@ -9,7 +9,7 @@ set(IS_PROFILE_BUILD $<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>)
 include(FetchContent)
 
 set(TRACY_ENABLE ON CACHE BOOL "" FORCE)
-FetchContent_Declare(tracy URL https://github.com/wolfpld/tracy/archive/refs/heads/master.zip)
+FetchContent_Declare(tracy URL https://github.com/wolfpld/tracy/archive/refs/tags/v0.13.1.zip)
 FetchContent_MakeAvailable(tracy)
 
 FetchContent_Declare(arena URL https://github.com/tsoding/arena/archive/refs/heads/master.zip)
@@ -35,9 +35,25 @@ set(ENABLE_CJSON_TEST OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(cjson URL https://github.com/davegamble/cjson/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(cjson)
 
+target_include_directories(
+        raylib
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_compile_options(
+        raylib
+        PRIVATE
+        "-include" "p17r-mem.h"
+)
+
 target_compile_definitions(
         raylib
         PRIVATE
+        RL_MALLOC=p17r_malloc_internal
+        RL_CALLOC=p17r_calloc_internal
+        RL_REALLOC=p17r_realloc_internal
+        RL_FREE=p17r_free_internal
         $<$<CONFIG:Release>:SUPPORT_TRACELOG=0>
 )
 

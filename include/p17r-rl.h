@@ -5,10 +5,6 @@
 
 #include "p17r-mem.h"
 
-#define RL_MALLOC(sz) P17R_MALLOC(sz)
-#define RL_CALLOC(n,sz) P17R_CALLOC(n,sz)
-#define RL_REALLOC(ptr,sz) P17R_REALLOC(ptr,sz)
-#define RL_FREE(ptr) P17R_FREE(ptr)
 #include <raylib.h>
 #include <raymath.h>
 
