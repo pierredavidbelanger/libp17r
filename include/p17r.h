@@ -1,6 +1,8 @@
 #ifndef P17R_H
 #define P17R_H
 
+#include <p17r-profile.h>
+
 #include <p17r-log.h>
 
 #include <p17r-mem.h>

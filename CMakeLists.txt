@@ -1,10 +1,16 @@
 cmake_minimum_required(VERSION 3.22)
-project(p17r C)
+project(p17r C CXX)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
+set(IS_PROFILE_BUILD $<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>)
+
 include(FetchContent)
+
+set(TRACY_ENABLE ON CACHE BOOL "" FORCE)
+FetchContent_Declare(tracy URL https://github.com/wolfpld/tracy/archive/refs/heads/master.zip)
+FetchContent_MakeAvailable(tracy)
 
 FetchContent_Declare(arena URL https://github.com/tsoding/arena/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(arena)
@@ -44,6 +50,7 @@ add_library(
         include/p17r-log.h
         include/p17r-mem.h
         include/p17r-noise.h
+        include/p17r-profile.h
         include/p17r-resources.h
         include/p17r-rl.h
         include/p17r-sched.h
@@ -55,6 +62,12 @@ add_library(
         src/resources.c
         src/rl.c
         src/sched.c
+)
+
+target_compile_definitions(
+        ${PROJECT_NAME}
+        PUBLIC
+        $<$<BOOL:${IS_PROFILE_BUILD}>:TRACY_ENABLE>
 )
 
 target_compile_options(
@@ -91,6 +104,8 @@ target_include_directories(
 
 target_link_libraries(
         ${PROJECT_NAME}
+        PUBLIC
+        $<$<BOOL:${IS_PROFILE_BUILD}>:TracyClient>
         PRIVATE
         raylib
         cjson
