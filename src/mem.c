@@ -10,7 +10,7 @@
 #include <stdlib.h>
 
 void *p17r_malloc_internal(const size_t sz) {
-    TRACELOG(LOG_DEBUG, "malloc(%lld)", sz);
+    TRACELOG(LOG_TRACE, "malloc(%lld)", sz);
     void *ptr = malloc(sz);
     #ifdef TRACY_ENABLE
     if (ptr) {
@@ -21,7 +21,7 @@ void *p17r_malloc_internal(const size_t sz) {
 }
 
 void *p17r_calloc_internal(const size_t n, const size_t sz) {
-    TRACELOG(LOG_DEBUG, "calloc(%lld, %lld)", n, sz);
+    TRACELOG(LOG_TRACE, "calloc(%lld, %lld)", n, sz);
     void *ptr = calloc(n, sz);
     #ifdef TRACY_ENABLE
     if (ptr) {
@@ -32,7 +32,7 @@ void *p17r_calloc_internal(const size_t n, const size_t sz) {
 }
 
 void *p17r_realloc_internal(void *ptr, const size_t sz) {
-    TRACELOG(LOG_DEBUG, "realloc(%p, %lld)", ptr, sz);
+    TRACELOG(LOG_TRACE, "realloc(%p, %lld)", ptr, sz);
     #ifdef TRACY_ENABLE
     if (ptr) {
         TracyCFree(ptr);
@@ -48,7 +48,7 @@ void *p17r_realloc_internal(void *ptr, const size_t sz) {
 }
 
 void p17r_free_internal(void *ptr) {
-    TRACELOG(LOG_DEBUG, "free(%p)", ptr);
+    TRACELOG(LOG_TRACE, "free(%p)", ptr);
     #ifdef TRACY_ENABLE
     if (ptr) {
         TracyCFree(ptr);
