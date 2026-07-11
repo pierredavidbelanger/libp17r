@@ -45,6 +45,7 @@ typedef struct {
 
 void resources_unload_all(resources_t *resources);
 texture_t resources_load_texture(resources_t *resources, const char *filename);
+size_t texture_atlas(const texture_t *texture, Vector2 size, texture_atlas_t *out);
 size_t resources_load_texture_atlas(resources_t *resources, const char *filepath, Vector2 size, texture_atlas_t *out);
 size_t resources_load_texture_atlas_json(resources_t *resources, const char *filepath, texture_atlas_t *out);
 size_t texture_atlas_get(const texture_atlas_t *atlas, const char *name, texture_t *out);

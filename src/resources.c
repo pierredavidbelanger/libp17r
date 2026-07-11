@@ -39,18 +39,12 @@ texture_t resources_load_texture(resources_t *resources, const char *filename) {
     return result;
 }
 
-size_t resources_load_texture_atlas(resources_t *resources, const char *filepath, const Vector2 size, texture_atlas_t *out) {
-    if (out == NULL) {
+size_t texture_atlas(const texture_t *texture, const Vector2 size, texture_atlas_t *out) {
+    if (texture == NULL || out == NULL) {
         return 0;
     }
 
-    const texture_t texture = resources_load_texture(resources, filepath);
-    if (texture.texture.id <= 0) {
-        TRACELOG(LOG_ERROR, "resources_load_texture_atlas: invalid texture %s", filepath);
-        return 0;
-    }
-
-    const Vector2 grid = Vector2Divide(texture.size, size);
+    const Vector2 grid = Vector2Divide(texture->size, size);
     const size_t item_count = (size_t) grid.x * (size_t) grid.y;
 
     if (item_count > P17R_RESOURCES_TEXTURE_ATLAS_ITEMS_MAX) {
@@ -63,13 +57,27 @@ size_t resources_load_texture_atlas(resources_t *resources, const char *filepath
             texture_atlas_item_t *item = &out->items[out->item_count++];
 
             snprintf(item->name, sizeof(item->name), "%zu,%zu", x, y);
-            item->texture = texture;
+            item->texture = *texture;
             item->texture.corner = Vector2Multiply(Vector2FromScalars((float) x, (float) y), size);
             item->texture.size = size;
         }
     }
 
     return out->item_count;
+}
+
+size_t resources_load_texture_atlas(resources_t *resources, const char *filepath, const Vector2 size, texture_atlas_t *out) {
+    if (out == NULL) {
+        return 0;
+    }
+
+    const texture_t texture = resources_load_texture(resources, filepath);
+    if (texture.texture.id <= 0) {
+        TRACELOG(LOG_ERROR, "resources_load_texture_atlas: invalid texture %s", filepath);
+        return 0;
+    }
+
+    return texture_atlas(&texture, size, out);
 }
 
 size_t resources_load_texture_atlas_json(resources_t *resources, const char *filepath, texture_atlas_t *out) {
@@ -227,6 +235,10 @@ size_t texture_atlas_find(const texture_atlas_t *atlas, const char *name_format,
         } else {
             break;
         }
+    }
+
+    if (total == 0) {
+        TRACELOG(LOG_WARNING, "texture_atlas_find: name %s found no texture", name_format);
     }
 
     return total;
