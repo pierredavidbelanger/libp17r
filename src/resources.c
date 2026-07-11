@@ -58,7 +58,7 @@ size_t texture_atlas(const texture_t *texture, const Vector2 size, texture_atlas
 
             snprintf(item->name, sizeof(item->name), "%zu,%zu", x, y);
             item->texture = *texture;
-            item->texture.corner = Vector2Multiply(Vector2FromScalars((float) x, (float) y), size);
+            item->texture.corner = Vector2Add(item->texture.corner, Vector2Multiply(Vector2FromScalars((float) x, (float) y), size));
             item->texture.size = size;
         }
     }
