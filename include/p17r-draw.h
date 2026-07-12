@@ -16,7 +16,8 @@ typedef struct {
     float rotation;
     bool flip_x;
     bool flip_y;
-    bool move_origin;
+    bool flip_origin;
+    bool flip_rotation;
     Color tint;
 } texture_draw_opts_t;
 
@@ -28,7 +29,7 @@ texture_draw_opts_t *texture_draw_opts_origin_norm(texture_draw_opts_t *opts, Ve
 texture_draw_opts_t *texture_draw_opts_origin_offset(texture_draw_opts_t *opts, Vector2 offset);
 texture_draw_opts_t *texture_draw_opts_tint(texture_draw_opts_t *opts, Color tint);
 texture_draw_opts_t *texture_draw_opts_alpha(texture_draw_opts_t *opts, float alpha);
-texture_draw_opts_t *texture_draw_opts_flip(texture_draw_opts_t *opts, bool flip_x, bool flip_y, bool move_origin);
+texture_draw_opts_t *texture_draw_opts_flip(texture_draw_opts_t *opts, bool flip_x, bool flip_y, bool flip_origin, bool flip_rotation);
 void texture_draw(const texture_draw_opts_t *opts);
 
 #endif //P17R_DRAW_H
