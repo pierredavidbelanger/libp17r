@@ -19,6 +19,6 @@ bool sched_has_hext(const sched_t *s);
 
 void sched_next(sched_t *s);
 
-#define sched_loop(f, s) for (const float f = sched_begin(s); sched_has_hext(s); sched_next(s))
+#define sched_loop(dt, s) for (const float dt = sched_begin(s); sched_has_hext(s); sched_next(s))
 
 #endif //P17R_SCHED_H
