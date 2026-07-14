@@ -33,8 +33,8 @@ texture_t resources_load_texture(resources_t *resources, const char *filename) {
     resources->texture_count++;
 
     result.texture = texture;
-    result.corner = Vector2Zero();
-    result.size = Vector2FromScalars((float) texture.width, (float) texture.height);
+    result.rectangle.corner = Vector2Zero();
+    result.rectangle.size = Vector2FromScalars((float) texture.width, (float) texture.height);
 
     return result;
 }
@@ -44,7 +44,7 @@ size_t texture_atlas(const texture_t *texture, const Vector2 size, texture_atlas
         return 0;
     }
 
-    const Vector2 grid = Vector2Divide(texture->size, size);
+    const Vector2 grid = Vector2Divide(texture->rectangle.size, size);
     const size_t item_count = (size_t) grid.x * (size_t) grid.y;
 
     if (item_count > P17R_RESOURCES_TEXTURE_ATLAS_ITEMS_MAX) {
@@ -58,8 +58,8 @@ size_t texture_atlas(const texture_t *texture, const Vector2 size, texture_atlas
 
             snprintf(item->name, sizeof(item->name), "%zu,%zu", x, y);
             item->texture = *texture;
-            item->texture.corner = Vector2Add(item->texture.corner, Vector2Multiply(Vector2FromScalars((float) x, (float) y), size));
-            item->texture.size = size;
+            item->texture.rectangle.corner = Vector2Add(item->texture.rectangle.corner, Vector2Multiply(Vector2FromScalars((float) x, (float) y), size));
+            item->texture.rectangle.size = size;
         }
     }
 
@@ -180,10 +180,10 @@ size_t resources_load_texture_atlas_json(resources_t *resources, const char *fil
 
         snprintf(item->name, sizeof(item->name), "%s", frame_filename->valuestring);
         item->texture = image_texture;
-        item->texture.corner.x = (float) frame_frame_x->valuedouble;
-        item->texture.corner.y = (float) frame_frame_y->valuedouble;
-        item->texture.size.x = (float) frame_frame_w->valuedouble;
-        item->texture.size.y = (float) frame_frame_h->valuedouble;
+        item->texture.rectangle.corner.x = (float) frame_frame_x->valuedouble;
+        item->texture.rectangle.corner.y = (float) frame_frame_y->valuedouble;
+        item->texture.rectangle.size.x = (float) frame_frame_w->valuedouble;
+        item->texture.rectangle.size.y = (float) frame_frame_h->valuedouble;
     }
 
 end:

@@ -1,10 +1,6 @@
 #ifndef P17R_RESOURCES_H
 #define P17R_RESOURCES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdlib.h>
 
 #include "p17r-rl.h"
@@ -27,13 +23,15 @@ typedef struct {
 } resources_t;
 
 typedef struct {
+    Vector2 corner;
+    Vector2 size;
+} texture_rectangle_t;
+
+typedef struct {
     Texture2D texture;
     union {
         Rectangle source;
-        struct {
-            Vector2 corner;
-            Vector2 size;
-        };
+        texture_rectangle_t rectangle;
     };
 } texture_t;
 
@@ -46,6 +44,10 @@ typedef struct {
     texture_atlas_item_t items[P17R_RESOURCES_TEXTURE_ATLAS_ITEMS_MAX];
     size_t item_count;
 } texture_atlas_t;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void resources_unload_all(resources_t *resources);
 texture_t resources_load_texture(resources_t *resources, const char *filename);

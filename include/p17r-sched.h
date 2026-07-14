@@ -1,10 +1,6 @@
 #ifndef P17R_SCHED_H
 #define P17R_SCHED_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdbool.h>
 
 typedef struct sched_t {
@@ -12,6 +8,10 @@ typedef struct sched_t {
     double last;
     double acc;
 } sched_t;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 sched_t sched_create(int tps);
 

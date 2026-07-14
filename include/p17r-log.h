@@ -1,16 +1,16 @@
 #ifndef P17R_LOG_H
 #define P17R_LOG_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifndef SUPPORT_TRACELOG
     #ifdef NDEBUG
         #define SUPPORT_TRACELOG 0
     #else
         #define SUPPORT_TRACELOG 1
     #endif
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 #if SUPPORT_TRACELOG

@@ -1,11 +1,11 @@
 #ifndef P17R_MEM_H
 #define P17R_MEM_H
 
+#include <stdlib.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <stdlib.h>
 
 #ifndef P17R_MALLOC
     void *p17r_malloc_internal(size_t sz);

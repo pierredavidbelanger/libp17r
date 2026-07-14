@@ -1,10 +1,6 @@
 #ifndef P17R_DRAW_H
 #define P17R_DRAW_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdbool.h>
 
 #include "p17r-rl.h"
@@ -24,6 +20,10 @@ typedef struct {
     bool flip_rotation;
     Color tint;
 } texture_draw_opts_t;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 texture_draw_opts_t texture_draw_opts_from(const texture_t *texture);
 texture_draw_opts_t *texture_draw_opts_translate(texture_draw_opts_t *opts, Vector2 position);

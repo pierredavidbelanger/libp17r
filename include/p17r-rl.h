@@ -1,10 +1,6 @@
 #ifndef P17R_RL_H
 #define P17R_RL_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdlib.h>
 
 #include "p17r-mem.h"
@@ -52,6 +48,10 @@ typedef struct {
     size_t atlasCount;
     Atlas *atlases;
 } Ress;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 float Vector2RotationToLookAt(Vector2 position, Vector2 target);
 
