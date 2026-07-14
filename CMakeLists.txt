@@ -35,16 +35,10 @@ set(ENABLE_CJSON_TEST OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(cjson URL https://github.com/davegamble/cjson/archive/refs/heads/master.zip)
 FetchContent_MakeAvailable(cjson)
 
-target_include_directories(
+target_precompile_headers(
         raylib
         PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
-target_compile_options(
-        raylib
-        PRIVATE
-        "-include" "p17r-mem.h"
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/p17r-mem.h
 )
 
 target_compile_definitions(
