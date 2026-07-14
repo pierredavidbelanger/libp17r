@@ -1,6 +1,10 @@
 #ifndef P17R_LOG_H
 #define P17R_LOG_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef SUPPORT_TRACELOG
     #ifdef NDEBUG
         #define SUPPORT_TRACELOG 0
@@ -14,6 +18,10 @@
     #define TRACELOG(level, ...) p17r_tracelog_internal(level, __VA_ARGS__)
 #else
     #define TRACELOG(level, ...) (void)0
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif //P17R_LOG_H

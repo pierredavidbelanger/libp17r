@@ -1,6 +1,10 @@
 #ifndef P17R_RESOURCES_H
 #define P17R_RESOURCES_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdlib.h>
 
 #include "p17r-rl.h"
@@ -50,5 +54,9 @@ size_t resources_load_texture_atlas(resources_t *resources, const char *filepath
 size_t resources_load_texture_atlas_json(resources_t *resources, const char *filepath, texture_atlas_t *out);
 size_t texture_atlas_get(const texture_atlas_t *atlas, const char *name, texture_t *out);
 size_t texture_atlas_find(const texture_atlas_t *atlas, const char *name_format, size_t max, texture_t *out);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //P17R_RESOURCES_H

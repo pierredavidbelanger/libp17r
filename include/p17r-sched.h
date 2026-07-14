@@ -1,6 +1,10 @@
 #ifndef P17R_SCHED_H
 #define P17R_SCHED_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdbool.h>
 
 typedef struct sched_t {
@@ -20,5 +24,9 @@ bool sched_has_hext(const sched_t *s);
 void sched_next(sched_t *s);
 
 #define sched_loop(dt, s) for (const float dt = sched_begin(s); sched_has_hext(s); sched_next(s))
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //P17R_SCHED_H

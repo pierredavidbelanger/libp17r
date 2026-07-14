@@ -1,6 +1,10 @@
 #ifndef P17R_RL_H
 #define P17R_RL_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdlib.h>
 
 #include "p17r-mem.h"
@@ -139,5 +143,9 @@ Rectangle GuiBoundsInside(Rectangle parent, float pad_h, float pad_v, float widt
  * @param vertical stack under the sibling (same horizontal position) if true, or to the right of the sibling (same vertical position) if false
  */
 Rectangle GuiBoundsInsideAfter(Rectangle parent, float pad_h, float pad_v, float width, float height, Rectangle sibling, bool vertical);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //P17R_RL_H

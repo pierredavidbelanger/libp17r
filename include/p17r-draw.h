@@ -1,6 +1,10 @@
 #ifndef P17R_DRAW_H
 #define P17R_DRAW_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdbool.h>
 
 #include "p17r-rl.h"
@@ -31,5 +35,9 @@ texture_draw_opts_t *texture_draw_opts_tint(texture_draw_opts_t *opts, Color tin
 texture_draw_opts_t *texture_draw_opts_alpha(texture_draw_opts_t *opts, float alpha);
 texture_draw_opts_t *texture_draw_opts_flip(texture_draw_opts_t *opts, bool flip_x, bool flip_y, bool flip_origin, bool flip_rotation);
 void texture_draw(const texture_draw_opts_t *opts);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //P17R_DRAW_H

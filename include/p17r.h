@@ -1,6 +1,10 @@
 #ifndef P17R_H
 #define P17R_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <p17r-profile.h>
 
 #include <p17r-log.h>
@@ -18,5 +22,9 @@
 #include <p17r-draw.h>
 
 #include <p17r-sched.h>
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // P17R_H

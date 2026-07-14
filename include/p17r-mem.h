@@ -1,6 +1,10 @@
 #ifndef P17R_MEM_H
 #define P17R_MEM_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdlib.h>
 
 #ifndef P17R_MALLOC
@@ -21,6 +25,10 @@
 #ifndef P17R_FREE
     void p17r_free_internal(void *ptr);
     #define P17R_FREE(ptr) p17r_free_internal(ptr)
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif //P17R_MEM_H
